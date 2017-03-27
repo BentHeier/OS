@@ -58,13 +58,14 @@ public class Cpu {
         Process prev = activeProcess;
         if (prev != null){
             prev.leftCPU(clock);
+            insertProcess(prev, clock);
         }
         activeProcessLeft(clock);
         if(activeProcess == null){
             activeProcess.enteredCPU(clock);
 
         }
-        return null;
+        return new Event(Event.SWITCH_PROCESS, clock + maxCpuTime);
     }
 
     /**
@@ -84,12 +85,7 @@ public class Cpu {
      */
     public Process getActiveProcess() {
         // Incomplete
-        if (this.activeProcess == null){
-            return null;
-        }
-        else {
-            return this.activeProcess;
-        }
+        return this.activeProcess;
     }
 
     /**
