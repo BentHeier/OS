@@ -42,6 +42,9 @@ public class Cpu {
         cpuQueue.add(p);
         this.statistics.totalNofTimesInReadyQueue++;
         p.enterCPUQueue(clock);
+        if (activeProcess == null){
+        return new Event(Event.NEW_PROCESS, clock + maxCpuTime);
+        }
         return null;
     }
 
